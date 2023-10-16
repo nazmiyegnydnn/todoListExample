@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:sans-serif;
+    background-color: #FFBEC5;
+}
+.home{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    width: 80%;
+    margin: 80px;
+    // .homeLeft{
+        
+    // }
+    .homeRight{
+     width: 900px;
+     text-align: center;
+     margin-top: 60px;
+    }
+}
