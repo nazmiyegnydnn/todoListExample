@@ -3,20 +3,83 @@
     padding: 0;
     box-sizing: border-box;
     font-family:sans-serif;
-    background-color: #FFBEC5;
 }
 .home{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    width: 80%;
-    margin: 80px;
-    // .homeLeft{
-        
-    // }
-    .homeRight{
-     width: 900px;
-     text-align: center;
-     margin-top: 60px;
+    background-color: #D3C8B5;
+    .homeMenu{
+        display: flex;
+        border-radius: 20px;
+        width: 1200px;
+        height: 500px;
+        padding: 50px;
+        position: absolute;
+        top:0;
+        left: 0;
+        margin: 70px 0 0 60px;
+        .homeLeft{
+            width: 300px;
+            height: 300px;
+            padding: 30px;
+            border-radius: 35px;
+            background-color: #DA977C;
+            h2{
+                margin-bottom: 5px;
+            }
+            ul{
+                list-style-type: none;
+                text-align: center;
+                li{
+                    padding-bottom: 5px;
+                    button{
+                        width: 120px;
+                        height: 30px;
+                        background-color: #DA977C;
+                        border-radius: 1px solid black;
+                    }
+                }
+            }
+           }
+           .homeRight{
+            width: 900px;
+            text-align: center;
+            margin: 50px 0 0 70px;
+            h1{
+               margin-bottom: 50px;
+            }
+            input{
+               width: 300px;
+               height: 50px;
+               border-color: #DA977C;
+               border-radius: 20px;
+            }
+            .add{
+               width: 150px;
+               height: 50px;
+               background-color: #DA977C;
+               border: none;
+               border-radius: 20px;
+               margin-left: 10px;
+               color: white;
+            }
+            .list{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: white;
+                width: 500px;
+                height: 50px;
+                margin: 50px 0 0 150px;
+                .completed{
+                    background-color: #565C2B;
+                    height: 50px;
+                    width: 100px;
+                }
+                .delete{
+                    background-color: #EF3A2C;
+                    height: 50px;
+                    width: 100px;
+                }
+            }
+           }
     }
 }
