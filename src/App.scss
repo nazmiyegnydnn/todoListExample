@@ -5,81 +5,80 @@
     font-family:sans-serif;
 }
 .home{
-    background-color: #D3C8B5;
-    .homeMenu{
+    .homeHeader{
         display: flex;
-        border-radius: 20px;
-        width: 1200px;
-        height: 500px;
-        padding: 50px;
-        position: absolute;
-        top:0;
-        left: 0;
-        margin: 70px 0 0 60px;
-        .homeLeft{
-            width: 300px;
-            height: 300px;
-            padding: 30px;
-            border-radius: 35px;
-            background-color: #DA977C;
-            h2{
-                margin-bottom: 5px;
-            }
-            ul{
-                list-style-type: none;
-                text-align: center;
-                li{
-                    padding-bottom: 5px;
-                    button{
-                        width: 120px;
-                        height: 30px;
-                        background-color: #DA977C;
-                        border-radius: 1px solid black;
-                    }
-                }
-            }
-           }
-           .homeRight{
-            width: 900px;
-            text-align: center;
-            margin: 50px 0 0 70px;
-            h1{
-               margin-bottom: 50px;
-            }
-            input{
-               width: 300px;
-               height: 50px;
-               border-color: #DA977C;
-               border-radius: 20px;
-            }
-            .add{
-               width: 150px;
-               height: 50px;
-               background-color: #DA977C;
-               border: none;
-               border-radius: 20px;
-               margin-left: 10px;
-               color: white;
-            }
-            .list{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background-color: white;
-                width: 500px;
-                height: 50px;
-                margin: 50px 0 0 150px;
-                .completed{
-                    background-color: #565C2B;
-                    height: 50px;
-                    width: 100px;
-                }
-                .delete{
-                    background-color: #EF3A2C;
-                    height: 50px;
-                    width: 100px;
-                }
-            }
-           }
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #E6F1F0;
+        height: 200px;
+        img{
+            margin-left: 450px;
+            width: 90px;
+            height: 100px;
+        }
+        h1{
+            font-size: 40px;
+            margin-left: 40px;
+            color: #3D685E;
+        }
     }
+    .todoList{
+        text-align: center;
+        margin-top: 70px;
+        .todo-input{
+            border:none;
+            border-bottom: 1px solid #3D685E;
+            width: 300px;
+            height: 30px;
+            &:focus{
+                border-bottom: 1px solid #3D685E;
+                outline: none;
+            }
+        }
+        span{
+           svg{
+            width: 20px;
+            height: 20px;
+            color: white;
+           }
+        }
+        button{
+            width: 70px;
+            height: 30px;
+            background-color: #3D685E;
+            border: none;
+            margin-left: 15px;
+            color: #E6F1F0;
+        }
+        select{
+            background-color: #3D685E;
+            width: 150px;
+            height: 30px;
+            margin-top: 30px;
+            color: #E6F1F0;
+            border: none;
+        }
+    }
+    .todosCard{
+        margin: 100px 0 0 350px;
+        border: 1px solid #3D685E;
+        width: 900px;
+        .list{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+       
+            span{
+                border: 1px solid #3D685E;
+                padding: 5px;
+            }
+            p{
+                border: 1px solid #3D685E;
+                padding: 5px;
+                width: 500px;
+            }
+        }
+    }
+
+
 }
