@@ -13,11 +13,11 @@
         height: 200px;
         img{
             margin-left: 450px;
-            width: 90px;
-            height: 100px;
+            width: 100px;
+            height: 120px;
         }
         h1{
-            font-size: 40px;
+            font-size: 50px;
             margin-left: 40px;
             color: #3D685E;
         }
@@ -25,57 +25,82 @@
     .todoList{
         text-align: center;
         margin-top: 70px;
-        .todo-input{
-            border:none;
-            border-bottom: 1px solid #3D685E;
-            width: 300px;
-            height: 30px;
-            &:focus{
+        .todoMenu{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+            .todo-input{
+                border:none;
                 border-bottom: 1px solid #3D685E;
-                outline: none;
+                width: 300px;
+                height: 30px;
+                &:focus{
+                    border-bottom: 1px solid #3D685E;
+                    outline: none;
+                }
             }
-        }
-        span{
-           svg{
-            width: 20px;
-            height: 20px;
-            color: white;
-           }
-        }
-        button{
-            width: 70px;
-            height: 30px;
-            background-color: #3D685E;
-            border: none;
-            margin-left: 15px;
-            color: #E6F1F0;
+            button{
+                width: 70px;
+                height: 30px;
+                background-color: #3D685E;
+                border: none;
+                margin-left: 15px;
+                color: #E6F1F0;
+            }
         }
         select{
             background-color: #3D685E;
             width: 150px;
             height: 30px;
-            margin-top: 30px;
+            margin-left: 30px;
             color: #E6F1F0;
             border: none;
         }
+        .todoFilter{
+            margin-left: 900px;
+        }
     }
     .todosCard{
-        margin: 100px 0 0 350px;
-        border: 1px solid #3D685E;
-        width: 900px;
+        margin: 100px 0 100px 100px;
+        width: 1100px;
+        background-color:#E6F1F0 ;
+        border:2px solid #3D685E ;
+        padding: 10px;
         .list{
             display: flex;
             justify-content: flex-start;
             align-items: center;
-       
+            border-bottom: 0.05px solid #3D685E;
+            outline: none;
+            margin: 25px 0;
             span{
-                border: 1px solid #3D685E;
                 padding: 5px;
+                margin: 10px 0 0 20px;
             }
             p{
-                border: 1px solid #3D685E;
                 padding: 5px;
                 width: 500px;
+                margin: 10px 0 0 20px;
+            }
+            .passive{
+                text-decoration: line-through;
+            }
+            .completed{
+                background-color: #9C829B;
+                padding: 10px;
+                margin: 10px 0 5px 20px;
+                border: none;
+            }
+            .delete{
+                background-color: #E9A49D;
+                padding: 10px;
+                margin: 10px 0 5px 20px;
+                border: none;
+            }
+            .category{
+                padding: 5px;
+                margin: 10px 0 0 20px;
             }
         }
     }
