@@ -18,10 +18,7 @@ const initialState = {
     name: 'app',  
     initialState,
     reducers: {
-            // kull olay //
-             addcategory : (state , action)  => {
-            state.category = [...state.category , {id:3 , name: "c3"}]  
-        }
+   
         
     }
   })

@@ -5,23 +5,19 @@ import "./App.scss";
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [newTodos, setNewTodos] = useState("");
-  const [statu, setStatu] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("selectCategory");
+  const [selectedCategory, setSelectedCategory] = useState("Tümü");
+  const [selectedFilter, setSelectedFilter] = useState("Tümü");
 
   const url = "https://jsonplaceholder.typicode.com/todos";
 
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((todos) =>
-        setTodos(
-          todos
-            .slice(0, 5)
-            ?.map((item) => ({ ...item, category: "Çok Önemli" }))
-        )
-      );
+      .then((data) => {
+        const initialTodos = data.slice(0, 5).map((item) => ({ ...item, category: "Analiz" }));
+        setTodos(initialTodos);
+      });
   }, []);
-  console.log(todos);
 
   const handleInput = (e) => {
     setNewTodos(e.target.value);
@@ -40,6 +36,7 @@ const App = () => {
     };
     setTodos([...todos, newItem]);
     setNewTodos("");
+    setSelectedCategory("Tümü");
   };
 
   const toggleCompleted = (id) => {
@@ -52,10 +49,19 @@ const App = () => {
       })
     );
   };
+
   const deleteClick = (id) => {
-    const deleteFilter = todos?.filter((el) => el.id !== id);
-    setTodos(deleteFilter);
+    const filteredData = todos?.filter((el) => el.id !== id);
+    setTodos(filteredData);
   };
+
+  const handleFilterChange = (event) => {
+    setSelectedFilter(event.target.value);
+  };
+
+  const filteredTodos = selectedFilter === "Tümü" ? todos : todos.filter((item) => item.category === selectedFilter);
+
+
   return (
     <div className="home">
       <div className="homeHeader">
@@ -64,55 +70,46 @@ const App = () => {
       </div>
       <div className="todoList">
         <div className="todoMenu">
-        <input
-          type="text"
-          className="todo-input"
-          placeholder="Add..."
-          onChange={handleInput}
-          value={newTodos}
-        />
-            <select
-              name="todos"
-              className="filter-todo"
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-            >
-              <option value="selectCategory" disabled selected>
-                Kategori Seç
-              </option>
-              <option value="important">Önemli</option>
-              <option value="very-important">Çok Önemli</option>
-              <option value="less-important">Az Önemli</option>
-            </select>
-            <button className="add" onClick={addItem}>
-              EKLE
-            </button>
-          </div>
+          <input
+            type="text"
+            className="todo-input"
+            placeholder="Add..."
+            onChange={handleInput}
+            value={newTodos}
+          />
           <select
-            name="todosFilter"
-            className="todoFilter"
-            // value={selectedCategory}
-            // onChange={handleCategoryChange}
+            name="todos"
+            className="filter-todo"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
           >
-            <option value="selectCategory" disabled selected>
-              Filtreleme
-            </option>
-            <option value="important">Önemli</option>
-            <option value="very-important">Çok Önemli</option>
-            <option value="less-important">Az Önemli</option>
+            <option value="Tümü">Tümü</option>
+            <option value="Analiz">Analiz</option>
+            <option value="Geliştirme">Geliştirme</option>
+            <option value="Test">Test</option>
           </select>
+          <button className="add" onClick={addItem}>
+            EKLE
+          </button>
+        </div>
+        <select
+          name="todosFilter"
+          className="todoFilter"
+          value={selectedFilter}
+          onChange={handleFilterChange}
+        >
+          <option value="Tümü">Tümü</option>
+          <option value="Analiz">Analiz</option>
+          <option value="Geliştirme">Geliştirme</option>
+          <option value="Test">Test</option>
+        </select>
       </div>
       <div className="todosCard">
-        {todos.map((el, index) => (
-          <div className="list" key={el.userId}>
+        {filteredTodos.map((el, index) => (
+          <div className="list" key={el.id}>
             <span className="indexId">{index + 1}</span>
-            <p className={el.completed === true || statu ? "passive" : ""}>
-              {el.title}
-            </p>
-            <button
-              className="completed"
-              onClick={() => toggleCompleted(el.id)}
-            >
+            <p className={el.completed ? "passive" : ""}>{el.title}</p>
+            <button className="completed" onClick={() => toggleCompleted(el.id)}>
               Tamamlandı
             </button>
             <button className="delete" onClick={() => deleteClick(el.id)}>
