@@ -1,6 +1,7 @@
 import Logo from "./logo.png";
-import { useEffect, useState } from "react";
+import { useState ,useEffect} from "react";
 import "./App.scss";
+import axios from 'axios';
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -8,16 +9,40 @@ const App = () => {
   const [selectedCategory, setSelectedCategory] = useState("Tümü");
   const [selectedFilter, setSelectedFilter] = useState("Tümü");
 
-  const url = "https://jsonplaceholder.typicode.com/todos";
 
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        const initialTodos = data.slice(0, 5).map((item) => ({ ...item, category: "Analiz" }));
-        setTodos(initialTodos);
-      });
-  }, []);
+//POST İŞLEMİ YAPIP TEKRAR GET YAPĞACAĞIMIZ İÇİN 2 DEFA YAPMADIK FONK TANIMLAYIP ÇAĞIRDIK
+// const getData = ()=>{
+//      fetch("https://jsonplaceholder.typicode.com/todos"
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const initialTodos = data.slice(0, 5).map((item) => ({ ...item, category: "Analiz" }));
+//         setTodos(initialTodos);
+//       });
+// }
+//   useEffect(() => {
+//    getData()
+//   }, []);
+
+//   useEffect(() => {
+//  fetch("https://jsonplaceholder.typicode.com/todos")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const initialTodos = data.slice(0, 5).map((item) => ({ ...item, category: "Analiz" }));
+//         setTodos(initialTodos);
+//       });
+//   }, []);
+
+
+
+useEffect(() => {
+  axios
+    .get('https://jsonplaceholder.typicode.com/todos')
+    .then((response) => {
+      const initialTodos = response.data.slice(0, 5).map((item) => ({ ...item, category: "Analiz" }));
+      setTodos(initialTodos);
+    })
+}, []);
+
 
   const handleInput = (e) => {
     setNewTodos(e.target.value);
@@ -34,9 +59,21 @@ const App = () => {
       completed: false,
       category: selectedCategory,
     };
-    setTodos([...todos, newItem]);
+    //POST İŞLEMİ
+  //   fetch('https://jsonplaceholder.typicode.com/todos', {
+  //   method: 'POST',
+  //   body: JSON.stringify(newItem),
+  //   headers: {
+  //     'Content-type': 'application/json; charset=UTF-8',
+  //   },
+  // })
+  // .then((response) => response.json())
+  //   .then((json) => console.log(json));
+  //  getData()
+    setTodos([...todos , newItem])
     setNewTodos("");
     setSelectedCategory("Tümü");
+    // setSelectedFilter("Tümü")
   };
 
   const toggleCompleted = (id) => {
@@ -46,7 +83,7 @@ const App = () => {
           return { ...todo, completed: !todo.completed };
         }
         return todo;
-      })
+      })  
     );
   };
 
@@ -55,11 +92,35 @@ const App = () => {
     setTodos(filteredData);
   };
 
-  const handleFilterChange = (event) => {
-    setSelectedFilter(event.target.value);
+  const handleFilterChange = (e) => {
+    setSelectedFilter(e.target.value);
   };
 
-  const filteredTodos = selectedFilter === "Tümü" ? todos : todos.filter((item) => item.category === selectedFilter);
+const filteredTodos = () => {
+  if (selectedFilter === "Tümü") {
+    return todos;
+  } else {
+    const filteredItems = todos.filter((item) => item.category === selectedFilter);
+    return filteredItems;
+  }
+}
+const todoFilter = filteredTodos();
+
+// const handleFilterOrdered = (e) => {  Sıralama işlemi yaptıracağım sonra
+//   setOrderedFilter(e.target.value);
+// };
+// const handleFilterChange = (e) => {
+//   const selectedValue = e.target.value;
+//   setSelectedFilter(selectedValue);
+
+//   if (selectedValue === "Tümü") {
+//     // Eğer "Tümü" seçildiyse, filtreyi uygulamadan tüm todos'u göster
+//     setTodos(todos); // orijinal veriyi geri yükle
+//   } else {
+//     const filteredItems = todos.filter((item) => item.category === selectedValue);
+//     setTodos(filteredItems); // filtreyi uygula ve todos'u güncelle
+//   }
+// };
 
 
   return (
@@ -92,6 +153,7 @@ const App = () => {
             EKLE
           </button>
         </div>
+
         <select
           name="todosFilter"
           className="todoFilter"
@@ -105,7 +167,7 @@ const App = () => {
         </select>
       </div>
       <div className="todosCard">
-        {filteredTodos.map((el, index) => (
+        {todoFilter.map((el, index) => (
           <div className="list" key={el.id}>
             <span className="indexId">{index + 1}</span>
             <p className={el.completed ? "passive" : ""}>{el.title}</p>
